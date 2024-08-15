@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>data_processor</name>
+  <version>0.0.1</version>
+  <description>A ROS 2 package for processing LaserScan data.</description>
+
+  <maintainer email="your.email@example.com">Nicholas Yao</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
