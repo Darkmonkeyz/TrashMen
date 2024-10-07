@@ -44,15 +44,14 @@ private:
         for (const auto &segment : segments) {
             if (isCylindrical(segment)) {
                 RCLCPP_INFO(this->get_logger(), "Cylinder detected!");
-                // TODO: Add your code here to transform the cylinder's position into map coordinates
+                
                 for (auto cylinder : cylinders_){
                     cv::Point center = cv::Point(cylinder.first*100, cylinder.second*100);
                     cv::Scalar color(0, 255, 0);
                     int radius = 20; 
                     int thickness = 2;  
                     cv::circle(image, center, radius, color, thickness);
-                    cv::imshow("Image with Circles", image);
-                    cv::waitKey(1);
+                    
                 }
             }
             else{
@@ -62,10 +61,12 @@ private:
                     int radius = 20; 
                     int thickness = 2;  
                     cv::circle(image, center, radius, color, thickness);
-                    cv::imshow("Image with Circles", image);
-                    cv::waitKey(1);
+                    
                 }
             }
+            cv::imshow("Image with Circles", image);
+                    cv::waitKey(1);
+
         }
 
     }
@@ -129,7 +130,7 @@ private:
     {
         float segmentCenterX;
         float segmentCenterY;
-        if(segment.size() > 4){
+        if(segment.size() > 5){
         if (segment.size() % 2){
 
             std::pair<float, float> magnitude = normalizeVector(segment.at(std::round(segment.size()/2)).first, segment.at(std::round(segment.size()/2)).second);
@@ -139,8 +140,8 @@ private:
         else{
             std::pair<float,float> middleSeg = std::pair<float,float>((segment.at(segment.size()/2).first + segment.at((segment.size()/2)+1).first)/2 , (segment.at(segment.size()/2).second + segment.at((segment.size()/2)+1).second) /2); 
             std::pair<float, float> magnitude = normalizeVector(middleSeg.first, middleSeg.second);
-            segmentCenterX = (middleSeg.first + magnitude.first *0.15);
-            segmentCenterY = (middleSeg.second + magnitude.second *0.15);
+            segmentCenterX = (middleSeg.first + magnitude.first *0.145);
+            segmentCenterY = (middleSeg.second + magnitude.second *0.145);
         }
         }
         else{
