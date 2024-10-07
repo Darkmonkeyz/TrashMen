@@ -119,18 +119,40 @@ private:
         return segments;
     }
 
+    std::pair<float, float> normalizeVector(float x, float y){
+        float magnitude = std::sqrt(x*x + y*y);
+        return std::pair(x/magnitude, y/magnitude);
+    }
+
     // Check if a segment forms a cylindrical shape (circle fitting)
     bool isCylindrical(const std::vector<std::pair<float, float>> &segment)
     {
-        float segmentCenterX = (segment.front().first + segment.back().first)/2;
-        float segmentCenterY = (segment.front().second + segment.back().second)/2;
+        float segmentCenterX;
+        float segmentCenterY;
+        if(segment.size() > 4){
+        if (segment.size() % 2){
+
+            std::pair<float, float> magnitude = normalizeVector(segment.at(std::round(segment.size()/2)).first, segment.at(std::round(segment.size()/2)).second);
+            segmentCenterX = (segment.at(std::round(segment.size()/2)).first + magnitude.first *0.15);
+            segmentCenterY = (segment.at(std::round(segment.size()/2)).second + magnitude.second *0.15);
+        }
+        else{
+            std::pair<float,float> middleSeg = std::pair<float,float>((segment.at(segment.size()/2).first + segment.at((segment.size()/2)+1).first)/2 , (segment.at(segment.size()/2).second + segment.at((segment.size()/2)+1).second) /2); 
+            std::pair<float, float> magnitude = normalizeVector(middleSeg.first, middleSeg.second);
+            segmentCenterX = (middleSeg.first + magnitude.first *0.15);
+            segmentCenterY = (middleSeg.second + magnitude.second *0.15);
+        }
+        }
+        else{
+            return false;
+        }
         
 
         float rAvgSum = 0;
         for (auto point : segment){
             float distanceFromCentre = std::hypot(point.first - segmentCenterX, point.second - segmentCenterY);
             rAvgSum = rAvgSum + distanceFromCentre;
-            if (std::abs(distanceFromCentre - 0.15) > 0.1){
+            if (std::abs(distanceFromCentre - 0.15) > 0.035){
                 RCLCPP_INFO(this->get_logger(), "Cylinder not detected! at %f, %f", segmentCenterX, segmentCenterY);
                 return false;
                 
@@ -156,7 +178,7 @@ private:
         double robot_yaw = std::atan2(2.0 * (odom_.pose.pose.orientation.w * odom_.pose.pose.orientation.z + odom_.pose.pose.orientation.x * odom_.pose.pose.orientation.y), 1.0 - 2.0 * (odom_.pose.pose.orientation.y * odom_.pose.pose.orientation.y + odom_.pose.pose.orientation.z * odom_.pose.pose.orientation.z));
         std::pair<float, float> cylinder = std::make_pair(roboX + (std::cos(robot_yaw) * x - std::sin(robot_yaw) * y), roboY + (std::sin(robot_yaw) * x + std::cos(robot_yaw) * y));
         for (auto point : cylinders_){
-            if (std::hypot(point.first -cylinder.first, point.second, cylinder.second) < 0.05){
+            if (std::hypot(point.first -cylinder.first, point.second, cylinder.second) < 0.5){
                 return false;
             }
         }
