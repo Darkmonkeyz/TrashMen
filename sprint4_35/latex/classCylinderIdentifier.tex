@@ -1,0 +1,233 @@
+\hypertarget{classCylinderIdentifier}{}\doxysection{Cylinder\+Identifier Class Reference}
+\label{classCylinderIdentifier}\index{CylinderIdentifier@{CylinderIdentifier}}
+
+
+A ROS node for identifying cylindrical objects from Laser\+Scan data.  
+
+
+
+
+Inheritance diagram for Cylinder\+Identifier\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classCylinderIdentifier__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Cylinder\+Identifier\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classCylinderIdentifier__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCylinderIdentifier_a939e2d0ea26c608c12134ac1bf58de6a}{Cylinder\+Identifier}} ()
+\begin{DoxyCompactList}\small\item\em Constructor initializes the node and subscribes to topics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCylinderIdentifier_a47168f605bcfc6e86dbdbc8f18ceae99}{scan\+Callback}} (const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process Laser\+Scan messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCylinderIdentifier_ac130cf3ad9f3bcccb97e622b31ff6029}{odom\+Callback}} (const nav\+\_\+msgs\+::msg\+::\+Odometry\+::\+Shared\+Ptr msg)
+\begin{DoxyCompactList}\small\item\em Callback function to process Odometry messages. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ float, float $>$ $>$ \mbox{\hyperlink{classCylinderIdentifier_a761e57dc30430c912026702d47ca6674}{extract\+Points}} (const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr msg)
+\begin{DoxyCompactList}\small\item\em Converts Laser\+Scan data from polar to Cartesian coordinates. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::pair$<$ float, float $>$ $>$ $>$ \mbox{\hyperlink{classCylinderIdentifier_ad4bcfb7253dda2f4cb9c396ae74c427e}{segment\+Points}} (const std\+::vector$<$ std\+::pair$<$ float, float $>$$>$ \&points)
+\begin{DoxyCompactList}\small\item\em Segments Laser\+Scan points into continuous regions. \end{DoxyCompactList}\item 
+std\+::pair$<$ float, float $>$ \mbox{\hyperlink{classCylinderIdentifier_a4e680382f2efb207e51566480259d32a}{normalize\+Vector}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Normalizes a 2D vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classCylinderIdentifier_a8625397b75463ba2bfc18ae298a02446}{is\+Cylindrical}} (const std\+::vector$<$ std\+::pair$<$ float, float $>$$>$ \&segment)
+\begin{DoxyCompactList}\small\item\em Determines if a segment forms a cylindrical shape. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classCylinderIdentifier_a5d5ad84d414fa232e15da9031802eb8d}{add\+Cylinder\+Location}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Adds the detected cylinder\textquotesingle{}s location based on robot\textquotesingle{}s odometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rclcpp\+::\+Subscription$<$ sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan $>$\+::Shared\+Ptr \mbox{\hyperlink{classCylinderIdentifier_aeea1da3218718585329bb8a201587f37}{scan\+\_\+sub\+\_\+}}
+\item 
+rclcpp\+::\+Subscription$<$ nav\+\_\+msgs\+::msg\+::\+Odometry $>$\+::Shared\+Ptr \mbox{\hyperlink{classCylinderIdentifier_a8bef970e1b1dcdfd3401ce537c646764}{odom\+\_\+sub\+\_\+}}
+\item 
+nav\+\_\+msgs\+::msg\+::\+Odometry \mbox{\hyperlink{classCylinderIdentifier_a3b4bcfe94936c447f7d4af6836c7205e}{odom\+\_\+}}
+\item 
+std\+::vector$<$ std\+::pair$<$ float, float $>$ $>$ \mbox{\hyperlink{classCylinderIdentifier_a51c29e54589bc4f02d405ed22d1f1253}{cylinders\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A ROS node for identifying cylindrical objects from Laser\+Scan data. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCylinderIdentifier_a939e2d0ea26c608c12134ac1bf58de6a}\label{classCylinderIdentifier_a939e2d0ea26c608c12134ac1bf58de6a}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!CylinderIdentifier@{CylinderIdentifier}}
+\index{CylinderIdentifier@{CylinderIdentifier}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{CylinderIdentifier()}{CylinderIdentifier()}}
+{\footnotesize\ttfamily Cylinder\+Identifier\+::\+Cylinder\+Identifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor initializes the node and subscribes to topics. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCylinderIdentifier_a5d5ad84d414fa232e15da9031802eb8d}\label{classCylinderIdentifier_a5d5ad84d414fa232e15da9031802eb8d}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!addCylinderLocation@{addCylinderLocation}}
+\index{addCylinderLocation@{addCylinderLocation}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{addCylinderLocation()}{addCylinderLocation()}}
+{\footnotesize\ttfamily bool Cylinder\+Identifier\+::add\+Cylinder\+Location (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Adds the detected cylinder\textquotesingle{}s location based on robot\textquotesingle{}s odometry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate of the cylinder. \\
+\hline
+{\em y} & The y coordinate of the cylinder. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added, false if already exists. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCylinderIdentifier_a761e57dc30430c912026702d47ca6674}\label{classCylinderIdentifier_a761e57dc30430c912026702d47ca6674}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!extractPoints@{extractPoints}}
+\index{extractPoints@{extractPoints}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{extractPoints()}{extractPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::pair$<$float, float$>$ $>$ Cylinder\+Identifier\+::extract\+Points (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Converts Laser\+Scan data from polar to Cartesian coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The Laser\+Scan message. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of (x, y) points. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCylinderIdentifier_a8625397b75463ba2bfc18ae298a02446}\label{classCylinderIdentifier_a8625397b75463ba2bfc18ae298a02446}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!isCylindrical@{isCylindrical}}
+\index{isCylindrical@{isCylindrical}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{isCylindrical()}{isCylindrical()}}
+{\footnotesize\ttfamily bool Cylinder\+Identifier\+::is\+Cylindrical (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::pair$<$ float, float $>$$>$ \&}]{segment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Determines if a segment forms a cylindrical shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & The segment of points. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if cylindrical, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCylinderIdentifier_a4e680382f2efb207e51566480259d32a}\label{classCylinderIdentifier_a4e680382f2efb207e51566480259d32a}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!normalizeVector@{normalizeVector}}
+\index{normalizeVector@{normalizeVector}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{normalizeVector()}{normalizeVector()}}
+{\footnotesize\ttfamily std\+::pair$<$float, float$>$ Cylinder\+Identifier\+::normalize\+Vector (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Normalizes a 2D vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x component. \\
+\hline
+{\em y} & The y component. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Normalized (x, y) vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCylinderIdentifier_ac130cf3ad9f3bcccb97e622b31ff6029}\label{classCylinderIdentifier_ac130cf3ad9f3bcccb97e622b31ff6029}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!odomCallback@{odomCallback}}
+\index{odomCallback@{odomCallback}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{odomCallback()}{odomCallback()}}
+{\footnotesize\ttfamily void Cylinder\+Identifier\+::odom\+Callback (\begin{DoxyParamCaption}\item[{const nav\+\_\+msgs\+::msg\+::\+Odometry\+::\+Shared\+Ptr}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Callback function to process Odometry messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The Odometry message. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCylinderIdentifier_a47168f605bcfc6e86dbdbc8f18ceae99}\label{classCylinderIdentifier_a47168f605bcfc6e86dbdbc8f18ceae99}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!scanCallback@{scanCallback}}
+\index{scanCallback@{scanCallback}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{scanCallback()}{scanCallback()}}
+{\footnotesize\ttfamily void Cylinder\+Identifier\+::scan\+Callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Callback function to process Laser\+Scan messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The Laser\+Scan message. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCylinderIdentifier_ad4bcfb7253dda2f4cb9c396ae74c427e}\label{classCylinderIdentifier_ad4bcfb7253dda2f4cb9c396ae74c427e}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!segmentPoints@{segmentPoints}}
+\index{segmentPoints@{segmentPoints}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{segmentPoints()}{segmentPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$std\+::pair$<$float, float$>$ $>$ $>$ Cylinder\+Identifier\+::segment\+Points (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::pair$<$ float, float $>$$>$ \&}]{points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Segments Laser\+Scan points into continuous regions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & Vector of (x, y) points. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of segmented point groups. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCylinderIdentifier_a51c29e54589bc4f02d405ed22d1f1253}\label{classCylinderIdentifier_a51c29e54589bc4f02d405ed22d1f1253}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!cylinders\_@{cylinders\_}}
+\index{cylinders\_@{cylinders\_}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{cylinders\_}{cylinders\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::pair$<$float, float$>$ $>$ Cylinder\+Identifier\+::cylinders\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCylinderIdentifier_a3b4bcfe94936c447f7d4af6836c7205e}\label{classCylinderIdentifier_a3b4bcfe94936c447f7d4af6836c7205e}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!odom\_@{odom\_}}
+\index{odom\_@{odom\_}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{odom\_}{odom\_}}
+{\footnotesize\ttfamily nav\+\_\+msgs\+::msg\+::\+Odometry Cylinder\+Identifier\+::odom\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCylinderIdentifier_a8bef970e1b1dcdfd3401ce537c646764}\label{classCylinderIdentifier_a8bef970e1b1dcdfd3401ce537c646764}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!odom\_sub\_@{odom\_sub\_}}
+\index{odom\_sub\_@{odom\_sub\_}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{odom\_sub\_}{odom\_sub\_}}
+{\footnotesize\ttfamily rclcpp\+::\+Subscription$<$nav\+\_\+msgs\+::msg\+::\+Odometry$>$\+::Shared\+Ptr Cylinder\+Identifier\+::odom\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCylinderIdentifier_aeea1da3218718585329bb8a201587f37}\label{classCylinderIdentifier_aeea1da3218718585329bb8a201587f37}} 
+\index{CylinderIdentifier@{CylinderIdentifier}!scan\_sub\_@{scan\_sub\_}}
+\index{scan\_sub\_@{scan\_sub\_}!CylinderIdentifier@{CylinderIdentifier}}
+\doxysubsubsection{\texorpdfstring{scan\_sub\_}{scan\_sub\_}}
+{\footnotesize\ttfamily rclcpp\+::\+Subscription$<$sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan$>$\+::Shared\+Ptr Cylinder\+Identifier\+::scan\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{sprint3__36_8cpp}{sprint3\+\_\+36.\+cpp}}\end{DoxyCompactItemize}
